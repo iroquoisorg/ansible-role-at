@@ -1,0 +1,12 @@
+---
+- name: Install at daemon
+  apt:
+    package: at
+    state: present
+
+- name: Enable users
+  lineinfile:
+    regexp: '{{ item }}'
+    state: absent
+    path: /etc/at.deny
+  with_items: "{{ at_enabled_users }}"
